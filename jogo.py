@@ -138,30 +138,25 @@ def jogo_principal(modo):
                 tela_derrota()
                 return
 
-        # Colisão com o jogador
         if jogador.colliderect(bola):
             movimento_bola[1] = -movimento_bola[1]
 
-        # Colisão com os blocos
         for bloco in blocos[:]:
             if bloco.colliderect(bola):
                 blocos.remove(bloco)
                 movimento_bola[1] = -movimento_bola[1]
                 break
 
-        # Verificar vitória
         if len(blocos) == 0:
             tela_vitoria()
             return
 
-        # Desenhar na tela
         tela.fill(cores["preta"])
         pygame.draw.rect(tela, cores["azul"], jogador)
         pygame.draw.rect(tela, cores["branca"], bola)
         for bloco in blocos:
             pygame.draw.rect(tela, cores["verde"], bloco)
 
-        # Mostrar vidas no modo fácil
         if modo == "facil":
             desenhar_texto(f"Vidas: {vidas}", 36, cores["amarela"], 620)
 
